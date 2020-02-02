@@ -1,0 +1,36 @@
+<html>
+	<head>
+	</head>
+	<body>
+		hello world
+		<script type="text/javascript">
+		
+			var d = new Date();
+			var n = d.getMonth();
+			var y = d.getFullYear(); 
+
+		console.log(getHalfYearArray(n))
+		console.log(y);
+
+		/* functions */
+
+		function getHalfYearArray(m){
+			var months = [];
+			var counter = 0;
+
+			for (var i = 0; i < 6; i++) {
+				if (m - i < 0) {
+					months.push(12 - counter);
+					counter++;
+				} else {
+					months.push(m - i);
+				}
+			}
+		return months;
+		}
+
+
+
+		</script>
+	</body>
+</html>
