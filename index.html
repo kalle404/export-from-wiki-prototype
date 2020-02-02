@@ -10,8 +10,8 @@
 		var y = d.getFullYear();
 
 		// console.log(getHalfYearArray(y, n)); 
-		// console.log(createURLs(2019, 12));
-
+		// console.log(createURL(2019, 12));
+		console.log(testRun(getHalfYearArray(y, n)));
 
 		/* functions */
 
@@ -30,7 +30,7 @@
 		return months;
 		}
 
-		function createURLs(y, m){
+		function createURL(y, m){
 			var monthLabel = "";
 			switch(m) {
 				case 1:
@@ -72,10 +72,15 @@
 				default: 	
 					monthLabel = "";
 			}
-			return "List_of_terrorist_incidents_in_" + monthLabel + "_" + y; 
+			return "https://en.wikipedia.org/w/api.php?action=parse&page=List_of_terrorist_incidents_in_January_" + monthLabel + "_" + y + "&contentmodel=wikitext&prop=wikitext&format=json"; 
 		}
 
-
+		function testRun(array) {
+			for (var i = 0; i < array.length; i++) {
+				console.log(createURL(array[i][0], array[i][1]));
+			}
+			return null;
+		}
 
 		/*
 		link to data wiki export desc
