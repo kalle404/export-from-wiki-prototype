@@ -4,16 +4,46 @@
 	<body>
 		hello world
 		<script type="text/javascript">
+		const debug = true; 
 
-		var d = new Date();
-		var n = d.getMonth();
-		var y = d.getFullYear();
+		var startDate = "";
+		var endDate = "";
+
+		console.log(initRun(startDate, endDate));
 
 		// console.log(getHalfYearArray(y, n)); 
 		// console.log(createURL(2019, 12));
-		console.log(testRun(getHalfYearArray(y, n)));
+		// console.log(testRun(getHalfYearArray(y, n)));
 
 		/* functions */
+
+		function initRun(startDate, endDate){
+			// function that checks if filters are set or default
+			if(startDate.length != 6 || endDate.length != 6) {
+				(debug) ? console.log('finding default filter values') : "" ;
+				// filters are not in required format e.g. unset
+				// finding default variable values instead
+				
+				var m = new Date().getMonth();
+				var y = new Date().getFullYear();
+
+				endDate = y.toString();
+				(m <= 9) ? endDate += "0" + m.toString(): endDate += m.toString();
+
+				startDate = m - 5;
+				(startDate < 0) ? y-- : "" ;
+				(startDate < 0) ? startDate = 12 + startDate : "" ;
+				(startDate <= 9) ? startDate = "0" + startDate.toString() : startDate = startDate.toString() ;
+				startDate = y.toString() + startDate;
+
+				
+				return [startDate, endDate];
+			}
+			(debug) ? console.log('custom filter values are set') : "" ;
+			return [startDate, endDate];
+		}
+
+		// function findSixMonthsEarlier(m, y){}
 
 		function getHalfYearArray(y, m){
 			var months = [];
