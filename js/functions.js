@@ -1,15 +1,8 @@
 		const debug = true; 
+		const totalCount = 120; 
 
-		var startDate = "";
-		var endDate = "";
-
-		// console.log(initRun(startDate, endDate));
-
-		// console.log(getHalfYearArray(y, n)); 
-		// console.log(createURL(2019, 12));
-		// console.log(testRun(getHalfYearArray(y, n)));
-
-		/* functions */
+		var startDate = "201806";
+		var endDate = "201906";
 
 		function initRun(startDate, endDate){
 			// function that checks if filters are set or default
@@ -30,11 +23,51 @@
 				(startDate <= 9) ? startDate = "0" + startDate.toString() : startDate = startDate.toString() ;
 				startDate = y.toString() + startDate;
 
-				
+				(debug) ? console.log('found values are ' + startDate + " " + endDate) : "" ;
 				return [startDate, endDate];
 			}
 			(debug) ? console.log('custom filter values are set') : "" ;
+			(debug) ? console.log('found values are ' + startDate + " " + endDate) : "" ;
 			return [startDate, endDate];
+		}
+
+		function createMonthArray(array) {
+			var monthArray = [];
+
+			var startYear = array[0].toString();
+			startYear = startYear.substring(0,4);
+			var startMonth = array[0].toString();
+			startMonth = startMonth.substring(4,6);
+			var endYear = array[1].toString();
+			endYear = endYear.substring(0,4);
+			var endMonth = array[1].toString();
+			endMonth = endMonth.substring(4,6);
+
+
+			totalCounter = totalCount; 
+
+			for (i = endYear; i >= startYear && totalCounter >= 0; i--){
+				if (startYear == endYear && startMonth > endMonth) { 
+					(debug) ? console.error(' Start date later than end date! ') : "" ;
+					break; 
+				}
+
+				var monthCounter = 11; 
+				(i == endYear) ? monthCounter = Number(endMonth) : "" ;
+
+				for (y = monthCounter; y >= 0 && totalCounter >= 0; y--) {
+					totalCounter --; 
+					var yString = y.toString();
+					(yString.length < 2) ? yString = "0" + yString : "" ; 
+					
+					monthArray.push(i + yString);
+					
+					(totalCounter < 0 && debug) ? console.error(' Will not produce more that 10 years of data! ') : "" ;
+					if (i == startYear && y == startMonth) { break; }
+				}
+			}
+
+			return monthArray; 
 		}
 
 		// function findSixMonthsEarlier(m, y){}
