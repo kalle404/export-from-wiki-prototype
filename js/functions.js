@@ -1,8 +1,14 @@
-		const debug = true; 
-		const totalCount = 120; 
 
-		var startDate = "201806";
-		var endDate = "201906";
+		/* defining constants */
+		const debug = true; /* additional output to console for debugging */
+		const totalCount = 120; /* max amount of search, limited to 10 years */
+		const defaultSearch = 5; /* default number of months, including zero */ 
+
+		// var startDate = "201806";
+		// var endDate = "201906";
+
+		// var startDate = "";
+		// var endDate = "";
 
 		function initRun(startDate, endDate){
 			// function that checks if filters are set or default
@@ -17,7 +23,7 @@
 				endDate = y.toString();
 				(m <= 9) ? endDate += "0" + m.toString(): endDate += m.toString();
 
-				startDate = m - 5;
+				startDate = m - defaultSearch;
 				(startDate < 0) ? y-- : "" ;
 				(startDate < 0) ? startDate = 12 + startDate : "" ;
 				(startDate <= 9) ? startDate = "0" + startDate.toString() : startDate = startDate.toString() ;
@@ -62,7 +68,7 @@
 					
 					monthArray.push(i + yString);
 					
-					(totalCounter < 0 && debug) ? console.error(' Will not produce more that 10 years of data! ') : "" ;
+					(totalCounter < 0 && debug) ? console.error(" Will not produce more than " + totalCount + " months of data! ") : "" ;
 					if (i == startYear && y == startMonth) { break; }
 				}
 			}
@@ -72,71 +78,34 @@
 
 		// function findSixMonthsEarlier(m, y){}
 
-		function getHalfYearArray(y, m){
-			var months = [];
-			var counter = 0;
+		function createURLs(dateArray){
+			var urlsArray = [];
 
-			for (var i = 0; i < 6; i++) {
-				if (m - i < 0) {
-					months.push([y - 1, 12 - counter]);
-					counter++;
-				} else {
-					months.push([y, m - i]);
+			for (i = 0; i < dateArray.length; i++) {
+				
+				var y = dateArray[i].substring(0,4);
+				var m = dateArray[i].substring(4,6);
+				(debug) ? console.log("year: " + y + " month: " + m) : "" ;
+
+				var monthLabel = "";
+				switch(Number(m)) {
+					case 1: monthLabel = "January"; break; 
+					case 2: monthLabel = "February"; break; 
+					case 3: monthLabel = "March"; break;
+					case 4: monthLabel = "April"; break;
+					case 5: monthLabel = "May"; break;
+					case 6: monthLabel = "June"; break;
+					case 7:	monthLabel = "July"; break;
+					case 8:	monthLabel = "August"; break;
+					case 9: monthLabel = "September"; break;
+					case 10: monthLabel = "October"; break;
+					case 11: monthLabel = "November"; break;
+					case 12: monthLabel = "December"; break;					
+					default: monthLabel = "";
 				}
-			}
-		return months;
-		}
-
-		function createURL(y, m){
-			var monthLabel = "";
-			switch(m) {
-				case 1:
-					monthLabel = "January"; 
-					break; 
-				case 2: 
-					monthLabel = "February"; 
-					break; 
-				case 3:
-					monthLabel = "March"; 
-					break;
-				case 4:
-					monthLabel = "April"; 
-					break;
-				case 5:
-					monthLabel = "May"; 
-					break;
-				case 6:
-					monthLabel = "June"; 
-					break;
-				case 7:
-					monthLabel = "July"; 
-					break;
-				case 8:
-					monthLabel = "August"; 
-					break;
-				case 9: 
-					monthLabel = "September"; 
-					break;
-				case 10:
-					monthLabel = "October"; 
-					break;
-				case 11:
-					monthLabel = "November"; 
-					break;
-				case 12:
-					monthLabel = "December"; 
-					break;					
-				default: 	
-					monthLabel = "";
-			}
-			return "https://en.wikipedia.org/w/api.php?action=parse&page=List_of_terrorist_incidents_in_January_" + monthLabel + "_" + y + "&contentmodel=wikitext&prop=wikitext&format=json"; 
-		}
-
-		function testRun(array) {
-			for (var i = 0; i < array.length; i++) {
-				console.log(createURL(array[i][0], array[i][1]));
-			}
-			return null;
+				urlsArray.push("https://en.wikipedia.org/w/api.php?action=parse&page=List_of_terrorist_incidents_in_" + monthLabel + "_" + y + "&contentmodel=wikitext&prop=wikitext&format=json"); 
+			}	
+			return urlsArray;			
 		}
 
 		/*
