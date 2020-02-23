@@ -5,11 +5,25 @@
 	<body>
 		hello world
 		<script type="text/javascript">
-		
-			var startDate = "201806";
-			var endDate = "201906";
 
-			console.log( createURLs( createMonthArray( initRun(startDate, endDate) ) ) );
+			var startDate = "201906";
+			var endDate = 	"201906";
+
+			/*
+			const str = ' { "glossary": { "title": "example glossary", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", 					"SortAs": "SGML", 					"GlossTerm": "Standard Generalized Markup Language", 					"Acronym": "SGML", 					"Abbrev": "ISO 8879:1986", 					"GlossDef": {                         "para": "A meta-markup language, used to create markup languages such as DocBook.", 						"GlossSeeAlso": ["GML", "XML"]                     }, 					"GlossSee": "markup"                 }             }         }     } } '; 
+			console.log(JSON.parse(str).glossary.title);
+			*/ 
+		
+			// somewhere here -> https://www.youtube.com/watch?v=6mT3r8Qn1VY
+function setup() {
+	// loadJSON("https://en.wikipedia.org/w/api.php?action=parse&page=List_of_terrorist_incidents_in_June_2019&contentmodel=wikitext&prop=wikitext&format=json", gotData);
+	loadJSON("http://api.open-notify.org/astros.json", gotData);
+}
+
+setup();
+
+			
+			// console.log( createURLs( createMonthArray( initRun(startDate, endDate) ) ) );
 		</script>
 	</body>
 </html>
