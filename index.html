@@ -1,29 +1,60 @@
 <html>
 	<head>
-		<script type="text/javascript" src="js/functions.js"></script>
+		<title>Datatable</title>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">		
+		<script src="js/functions.js"></script>
+		<script src="js/dataFeed.js"></script>
 	</head>
 	<body>
-		hello world
-		<script type="text/javascript">
-
-			var startDate = "201906";
-			var endDate = 	"201906";
-
-			/*
-			const str = ' { "glossary": { "title": "example glossary", "GlossDiv": { "title": "S", "GlossList": { "GlossEntry": { "ID": "SGML", 					"SortAs": "SGML", 					"GlossTerm": "Standard Generalized Markup Language", 					"Acronym": "SGML", 					"Abbrev": "ISO 8879:1986", 					"GlossDef": {                         "para": "A meta-markup language, used to create markup languages such as DocBook.", 						"GlossSeeAlso": ["GML", "XML"]                     }, 					"GlossSee": "markup"                 }             }         }     } } '; 
-			console.log(JSON.parse(str).glossary.title);
-			*/ 
 		
-			// somewhere here -> https://www.youtube.com/watch?v=6mT3r8Qn1VY
-function setup() {
-	// loadJSON("https://en.wikipedia.org/w/api.php?action=parse&page=List_of_terrorist_incidents_in_June_2019&contentmodel=wikitext&prop=wikitext&format=json", gotData);
-	loadJSON("http://api.open-notify.org/astros.json", gotData);
-}
+		<script>
 
-setup();
+			var startDate = "202001";
+			var endDate = 	"202002";
+			populateTable(  createMonthArray( initRun(startDate, endDate) ), dataFeed() ); 
+				
 
-			
-			// console.log( createURLs( createMonthArray( initRun(startDate, endDate) ) ) );
 		</script>
+
+		<div class="tableContainer">
+			<table border = 1px>
+				<tr>
+					<th id="hidden">DATE</th>
+					<td colspan="2">FEB 23, 2020</td>
+				</tr>
+				<tr>
+					<th>Location</th>
+					<td>Addis Ababa, Ethiopia</td>
+				</tr>
+				<tr>
+					<th>Group</th>
+					<td>Oromo Liberation Front (suspected)</td>
+				</tr>
+				<tr>
+					<th>Fatalities</th>
+					<td>0</td>
+				</tr>
+				<tr>
+					<th id="hidden">Description</th>
+					<td colspan="2">A bomb attack on a rally in support of Ethiopian Prime Minister Abiy Ahmed injured 29 people. The incident occurred in the town of Ambo, Ethiopia outside of the capitol Addis Ababa. The police arrested six people in connection with the attack. It was suspected to be carried out by the Oromo Liberation Front.</td>
+				</tr>                      
+			</table>
+		</div>
+
+
+<!-- 
+
+Taustad tumeduselt siis järgnevalt(tumedaimast alustades):
+6F2A1B
+9C3B26
+BE6E5C
+
+Tekst:
+Põhhitekst: valge
+Grupeeringu nimi: F7A33E
+
+-->
+
 	</body>
 </html>

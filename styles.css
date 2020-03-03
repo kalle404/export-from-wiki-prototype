@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(icons/icons.woff2) format('woff2');
+  }
+
+body {
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    margin: 1rem;
+    font-size: 14px; 
+    background-color: whitesmoke !important;
+}
+
+.tableContainer {
+    width: 400px;
+    height: 200;
+    display: inline-block;
+}
+
+#hidden {
+    display: none;
+}

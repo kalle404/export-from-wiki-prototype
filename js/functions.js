@@ -106,4 +106,20 @@ function createURLs(dateArray){
 /*
 link to data wiki export desc
 https://stackoverflow.com/questions/38763293/how-to-get-table-data-from-wikipedia-page
+
+link to example
+storymaps.esri.com/stories/terrorist-attacks/
 */
+
+function populateTable( monthArray, dataFeed ) {
+	for (element of monthArray) {
+		for (event of dataFeed) {
+			if (element == event[0]) {
+			console.log("month " + element + " event month " + event[0]); 
+			}
+		}
+	}
+	
+	return null; 
+}
+
