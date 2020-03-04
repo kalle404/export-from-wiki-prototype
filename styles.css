@@ -95,3 +95,7 @@ body {
 #datarow_desc:hover {
     background: #burlywood; 
 }
+::selection {
+    background: #6F2A1B; 
+    color: whitesmoke; 
+}
