@@ -7,54 +7,66 @@
 		<script src="js/dataFeed.js"></script>
 	</head>
 	<body>
-		
-		<script>
 
-			var startDate = "202001";
-			var endDate = 	"202002";
-			populateTable(  createMonthArray( initRun(startDate, endDate) ), dataFeed() ); 
-				
-
-		</script>
-
-		<div class="tableContainer">
-			<table border = 1px>
-				<tr>
-					<th id="hidden">DATE</th>
-					<td colspan="2">FEB 23, 2020</td>
-				</tr>
-				<tr>
-					<th>Location</th>
-					<td>Addis Ababa, Ethiopia</td>
-				</tr>
-				<tr>
-					<th>Group</th>
-					<td>Oromo Liberation Front (suspected)</td>
-				</tr>
-				<tr>
-					<th>Fatalities</th>
-					<td>0</td>
-				</tr>
-				<tr>
-					<th id="hidden">Description</th>
-					<td colspan="2">A bomb attack on a rally in support of Ethiopian Prime Minister Abiy Ahmed injured 29 people. The incident occurred in the town of Ambo, Ethiopia outside of the capitol Addis Ababa. The police arrested six people in connection with the attack. It was suspected to be carried out by the Oromo Liberation Front.</td>
-				</tr>                      
-			</table>
+		<div class="button_wrapper">
+			<div class="btn-toolbar justify-content-between datebuttons" role="toolbar" aria-label="datebuttons1">
+				<div class="btn-group" role="group" aria-label="First row">
+				<button type="button" class="btn btn-secondary btn-sm buttonCustomWidth" id="button_year"> 12 months </button>
+				<button type="button" class="btn btn-secondary btn-sm buttonCustomWidth" id="button_half_year"> 6 months </button>
+				<button type="button" class="btn btn-primary btn-sm buttonCustomWidth" id="button_current_month"> Current month </button>
+				</div>
+			</div>
 		</div>
 
+		<div class="wrapper" id="wrapper"></div>
 
-<!-- 
+		<script>
 
-Taustad tumeduselt siis järgnevalt(tumedaimast alustades):
-6F2A1B
-9C3B26
-BE6E5C
+			var d = new Date();
+			var currentMonth = d.getFullYear().toString() + ( ( d.getMonth() < 10 ) ? "0" + d.getMonth().toString() : d.getMonth().toString() );
 
-Tekst:
-Põhhitekst: valge
-Grupeeringu nimi: F7A33E
+			d.setMonth( d.getMonth() -6 ); 
+			var halfYear = d.getFullYear().toString() + ( ( d.getMonth() < 10 ) ? "0" + d.getMonth().toString() : d.getMonth().toString() );
 
--->
+			d.setMonth( d.getMonth() -6 ); 
+			var lastYear = d.getFullYear().toString() + ( ( d.getMonth() < 10 ) ? "0" + d.getMonth().toString() : d.getMonth().toString() );
+			
+			window.onload = function(){ 
 
+				/* initial run */
+				document.getElementById('wrapper').innerHTML = populateTable(  createMonthArray( initRun(currentMonth, currentMonth) ), dataFeed() ); 
+
+				document.getElementById("button_year").addEventListener("click", function(){
+					(debug) ? console.log(" year is chosen ") : "" ; 
+					document.getElementById("button_year").className = "btn btn-primary btn-sm buttonCustomWidth";
+					document.getElementById("button_half_year").className = "btn btn-secondary btn-sm buttonCustomWidth";
+					document.getElementById("button_current_month").className = "btn btn-secondary btn-sm buttonCustomWidth";
+
+					document.getElementById('wrapper').innerHTML = populateTable(  createMonthArray( initRun(lastYear, currentMonth) ), dataFeed() ); 
+				});
+				
+				document.getElementById("button_half_year").addEventListener("click", function(){
+					(debug) ? console.log(" half year is chosen ") : "" ; 
+					document.getElementById("button_year").className = "btn btn-secondary btn-sm buttonCustomWidth";
+					document.getElementById("button_half_year").className = "btn btn-primary btn-sm buttonCustomWidth";
+					document.getElementById("button_current_month").className = "btn btn-secondary btn-sm buttonCustomWidth";					
+
+					document.getElementById('wrapper').innerHTML = populateTable(  createMonthArray( initRun(halfYear, currentMonth) ), dataFeed() ); 
+				});
+				
+				document.getElementById("button_current_month").addEventListener("click", function(){
+					(debug) ? console.log(" current month is chosen ") : "" ; 
+					document.getElementById("button_year").className = "btn btn-secondary btn-sm buttonCustomWidth";
+					document.getElementById("button_half_year").className = "btn btn-secondary btn-sm buttonCustomWidth";
+					document.getElementById("button_current_month").className = "btn btn-primary btn-sm buttonCustomWidth";				
+					
+					document.getElementById('wrapper').innerHTML = populateTable(  createMonthArray( initRun(currentMonth, currentMonth) ), dataFeed() ); 
+				});
+								
+				
+
+			}
+
+		</script>
 	</body>
 </html>

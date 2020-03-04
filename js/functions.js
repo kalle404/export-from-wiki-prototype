@@ -112,14 +112,37 @@ storymaps.esri.com/stories/terrorist-attacks/
 */
 
 function populateTable( monthArray, dataFeed ) {
+	var output = "<div class=\"tableContainer table \">"; 
+	// var output = "<div class=\"tableContainer table \">  <table id=\"data_table\"> "; 
 	for (element of monthArray) {
 		for (event of dataFeed) {
 			if (element == event[0]) {
-			console.log("month " + element + " event month " + event[0]); 
+				output += "<div id=\"datarow_date\" >" + event[1] + "</div>";
+
+				output += "<div id=\"datarow_block\" >"; 
+					output += "<table class=\"table\" style=\"width:100%\">"; 
+						output += "<tr scope=\"row\" id=\"datarow_location\">"; 
+							output += "<td id=\"label\"> Location </td>"; 
+							output += "<td>" + event[2] + "</td>";
+						output += "</tr>";
+						output += "<tr scope=\"row\" id=\"datarow_group\">"; 					 							
+							output += "<td> Group </td>"; 
+							output += "<td>" + event[3] + "</td>";
+						output += "</tr>"; 				
+						output += "<tr scope=\"row\" id=\"datarow_fat\">"; 									
+							output += "<td> Fatalities </td>"; 
+							output += "<td>" + event[4] + "</td>";
+						output += "</tr>"; 
+						output += "<tr scope=\"row\" id=\"datarow_desc\" >"; 									
+							output += "<td colspan=\"2\">" + event[5] +  "</td>"; 
+						output += "</tr>"; 						
+					output += "</table>";
+				output += "</div>";
 			}
 		}
 	}
-	
-	return null; 
+	output += "</div>";
+	// output += "</table></div>";
+	return output; 
 }
 
